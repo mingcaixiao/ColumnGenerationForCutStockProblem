@@ -15,7 +15,7 @@ Column generation is a very efficient method to solve this problem.
 ## Depend on
 [Google OR-Tools](https://github.com/google/or-tools):Google's Operations Research tools.
 
-I use ortools to solve master linear programing,sub and final interger programing.
+I use ortools to solve master linear programing,sub and final integer programing.
 
 To **build** this project,must install google or-tools first
 
@@ -33,7 +33,7 @@ You can build like this:
 ```
 mkdir build
 cd build
-cmake ..
+cmake .. -DCMAKE_PREFIX_PATH=path/to/or-tools/install-dir
 cmake --build .
 ```
 

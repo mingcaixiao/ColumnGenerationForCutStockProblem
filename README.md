@@ -7,7 +7,7 @@ In operations research, the cutting-stock problem is the problem of cutting stan
 [column generation](https://en.wikipedia.org/wiki/Column_generation)
 Column generation or delayed column generation is an efficient algorithm for solving large linear programs.
 
-In cutting stock problem,Num cutting pattern will increases exponentially as  num of different part increases.
+In cutting stock problem,Num of cutting pattern will increases exponentially as  num of different part increases.
 
 So exploiting all cutting patterns in advance is not practical.
 

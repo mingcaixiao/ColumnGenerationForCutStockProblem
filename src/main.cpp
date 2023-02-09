@@ -43,7 +43,7 @@ void cutstock(double rollLen,std::vector<double>& len,std::vector<double>&demand
 		data.pats.push_back(pat);
 	}
 	auto solveMasterProblem = [](Data& data)->std::vector<double> {
-		std::unique_ptr<MPSolver> solver(MPSolver::CreateSolver("CLP"));
+		std::unique_ptr<MPSolver> solver(MPSolver::CreateSolver("GLOP"));
 		if (!solver) {
 			LOG(WARNING) << "CLP solver unavailable.";
 		}
@@ -83,7 +83,9 @@ void cutstock(double rollLen,std::vector<double>& len,std::vector<double>&demand
 			std::cout << "export lp file failed" << std::endl;
 		}
 #endif
-		MPSolver::ResultStatus resultStatus=solver->Solve();
+		MPSolverParameters param;
+		param.SetIntegerParam(MPSolverParameters::LP_ALGORITHM, MPSolverParameters::LpAlgorithmValues::DUAL);
+		MPSolver::ResultStatus resultStatus=solver->Solve(param);
 		if (resultStatus != MPSolver::ResultStatus::OPTIMAL) {
 			LOG(INFO) << "master problem don't get optimal!";
 			std::string lpString;

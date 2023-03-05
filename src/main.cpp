@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 #include "absl/flags/flag.h"
 #include "ortools/base/flags.h"
@@ -186,18 +187,35 @@ void cutstock(double rollLen,std::vector<double>& len,std::vector<double>&demand
 		int validIndex = 0;
 		int i = 0;
 		std::cout << "pattern" << "  num" << std::endl;
+		std::unordered_map<int, int> actualGeneration;
 		for (auto& var:vars){
 			if (var->solution_value() != 0){
 				//std::cout << "pattern_" << validIndex++ << ":";
 				for (auto pat : data.pats.at(i))
 				{
 					std::cout << data.len.at(pat.first)<<"*"<<pat.second<<" ";
+					if (actualGeneration.count(pat.first)) {
+						actualGeneration.at(pat.first) += pat.second*(int)var->solution_value();
+					}else {
+						actualGeneration.insert({pat.first,pat.second * (int)var->solution_value() });
+					}
 				}
 				std::cout << var->solution_value();
 				std::cout << std::endl;
 			}
 			i++;
 		}
+		double totoalPartLen = 0.0;
+		for (int i = 0; i < data.len.size(); ++i) {
+			totoalPartLen += data.len.at(i) * data.demand.at(i);
+		}
+		std::cout << "actual generation is:" << std::endl;
+		std::cout << "part " << " demand"<<" generation" << std::endl;
+		for (auto& a : actualGeneration) {
+			std::cout <<data.len.at(a.first) <<" " << data.demand.at(a.first) << " " << a.second << std::endl;
+		}
+		std::cout << "total part len is " << totoalPartLen<<std::endl;
+		std::cout << "utilization is " << totoalPartLen / (objValue * data.rollLen)<<std::endl;
 	};
 	while (true){
 		auto dualPrices=solveMasterProblem(data);
@@ -263,8 +281,10 @@ int main(int argc, char* argv[])
 		std::cout << "stockLen is " << rollLen << "\n"
 			<<"len is" << len << "\n" 
 			<< "demand is"<<demand << std::endl;
-
+		auto start = std::chrono::system_clock::now();
 		cutstock(rollLen, len, demand);
+		auto end = std::chrono::system_clock::now();
+		std::cout << "time is " << std::chrono::duration<double>(end-start).count()<<" seconds" << std::endl;
 	}
 	return EXIT_SUCCESS;
 }

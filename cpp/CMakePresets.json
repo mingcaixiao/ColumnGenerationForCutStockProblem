@@ -10,7 +10,7 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "cl.exe",
         "CMAKE_CXX_COMPILER": "cl.exe",
-        "CMAKE_PREFIX_PATH": "D:\\Download\\or-tools_x64_VisualStudio2022_cpp_v9.5.2237"
+        "CMAKE_PREFIX_PATH": "D:\\Download\\or-tools_x64_VisualStudio2022_cpp_v9.6.2534"
       },
       "condition": {
         "type": "equals",

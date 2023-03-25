@@ -3,12 +3,7 @@
 #include <fstream>
 #include <chrono>
 
-#include "absl/flags/flag.h"
-#include "ortools/base/flags.h"
-#include "ortools/base/init_google.h"
-#include "ortools/base/logging.h"
 #include "ortools/linear_solver/linear_solver.h"
-#include "ortools/linear_solver/model_exporter.h"
 
 //#define WriteFile
 

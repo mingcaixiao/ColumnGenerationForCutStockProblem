@@ -7,3 +7,6 @@
 /target/
 Java/cutstock/target/
 cpp/
+/CSharp/CutStock/.vs/
+/CSharp/CutStock/bin/
+/CSharp/CutStock/obj/

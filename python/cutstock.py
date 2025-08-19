@@ -220,7 +220,7 @@ def solve_final_master_problem(d: Data):
 
     for i in range(len(d.partLen)):
 
-        constraint = solver.RowConstraint(data.partDemand[i], solver.infinity(), f'c_{i}')
+        constraint = solver.RowConstraint(d.partDemand[i], solver.infinity(), f'c_{i}')
 
         for j in range(len(d.patterns)):
 

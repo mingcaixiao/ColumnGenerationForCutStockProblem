@@ -94,15 +94,15 @@ def solve_restricted_master_problem(d: Data) -> list[float]:
 
     for i in range(len(d.partLen)):
 
-        consraint = solver.RowConstraint(d.partDemand[i], solver.infinity(), f'c_{i}')
+        constraint = solver.RowConstraint(d.partDemand[i], solver.infinity(), f'c_{i}')
 
         for j in range(len(d.patterns)):
 
             if i in d.patterns[j]:
 
-                consraint.SetCoefficient(x_list[j], d.patterns[j][i])
+                constraint.SetCoefficient(x_list[j], d.patterns[j][i])
 
-        cons_list.append(consraint)
+        cons_list.append(constraint)
 
 
 
@@ -220,15 +220,15 @@ def solve_final_master_problem(d: Data):
 
     for i in range(len(d.partLen)):
 
-        consraint = solver.RowConstraint(data.partDemand[i], solver.infinity(), f'c_{i}')
+        constraint = solver.RowConstraint(data.partDemand[i], solver.infinity(), f'c_{i}')
 
         for j in range(len(d.patterns)):
 
             if i in d.patterns[j]:
 
-                consraint.SetCoefficient(x_list[j], d.patterns[j][i])
+                constraint.SetCoefficient(x_list[j], d.patterns[j][i])
 
-        cons_list.append(consraint)
+        cons_list.append(constraint)
 
 
 
